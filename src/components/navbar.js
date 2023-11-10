@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './navbar.css';
 import Login from '../auth/Login';
 import Signup from '../auth/Signup';
-import FriendsPanel from '../pannels/FriendsPanel';
+import FriendsPanel from '../panels/FriendsPanel';
 
 const Navbar = () => {
   const [isLoginOpen, setLoginOpen] = useState(false);
@@ -27,10 +28,10 @@ const Navbar = () => {
     <nav>
       <ul className="left-links">
         <li>
-          <a href="/">Home</a>
+          <Link to="/">Home</Link>
         </li>
         <li>
-          <a href="/team">Team</a>
+          <Link to="/team">Team</Link>
         </li>
         <li className="search-container">
           <input type="text" placeholder="Search" className="search-input" />
@@ -39,12 +40,12 @@ const Navbar = () => {
       </ul>
       <ul className="right-links">
         <li>
-          <a href="/publications">Publications</a>
+         <Link to="/publications">Publications</Link>
         </li>
         <li>
-          <a href="/friends" onClick={() => setFriendsPanelOpen(!isFriendsPanelOpen)}>
+          <Link to="/friends" onClick={() => setFriendsPanelOpen(!isFriendsPanelOpen)}>
             F
-          </a>
+          </Link>
         </li>
         <li className="login-link">
           <a href="/login" onClick={openLogin}>
@@ -77,6 +78,11 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
+
+
+
 
 
 
