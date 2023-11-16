@@ -6,12 +6,14 @@ import Login from '../auth/Login';
 import Signup from '../auth/Signup';
 import FriendsPanel from '../panels/FriendsPanel';
 import Team from '../panels/Team';
+import Profile from '../auth/Profile'; // Import the Profile component
 
 const Navbar = () => {
   const [isLoginOpen, setLoginOpen] = useState(false);
   const [isSignupOpen, setSignupOpen] = useState(false);
   const [isFriendsPanelOpen, setFriendsPanelOpen] = useState(false);
   const [isTeamPanelOpen, setTeamPanelOpen] = useState(false);
+  const [isProfileOpen, setProfileOpen] = useState(false); // Add state for the profile
 
   const openLogin = () => {
     console.log("Opening Login");
@@ -38,7 +40,10 @@ const Navbar = () => {
     setFriendsPanelOpen(false);
   };
 
-  console.log("isTeamPanelOpen:", isTeamPanelOpen);
+  const toggleProfile = () => {
+    console.log("Toggling Profile");
+    setProfileOpen(!isProfileOpen);
+  };
 
   return (
     <nav>
@@ -63,9 +68,17 @@ const Navbar = () => {
           </Link>
         </li>
         <li className="login-link">
-          <Link to="/login" onClick={openLogin}>
-            Login
-          </Link>
+          {/* Conditionally render Login or Profile */}
+          {isProfileOpen ? (
+            <div onClick={toggleProfile}>
+              <Link to="#">Profile</Link>
+              {isProfileOpen && <Profile />}
+            </div>
+          ) : (
+            <Link to="/login" onClick={openLogin}>
+              Login
+            </Link>
+          )}
           {isLoginOpen && (
             <div className="modal">
               <div className="modal-content">
@@ -93,6 +106,7 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
 
 
 
