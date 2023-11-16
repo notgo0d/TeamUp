@@ -1,42 +1,48 @@
 .auth-modal {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    color: #000000; /* Text color */
-  }
-  
-  h2 {
-    margin-top: 0;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  label {
-    font-weight: bold;
-    color: #000000; /* Text color */
-  }
-  
-  input {
-    padding: 5px;
-  }
-  
-  button[type="submit"] {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-  }
-  
-  button[type="submit"]:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Add any other custom styles for the Login component here */
-  
+  background-color: #1f1d1d; /* Dark gray background color for the entire modal */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255, 165, 0, 0.5); /* Orange shadow */
+  text-align: center;
+  color: #ffffff; /* Text color */
+  border: 2px solid #ff9900; /* Orange border */
+}
+
+h2 {
+  margin-top: 0;
+  color: #ff9900; /* Header color */
+}
+
+form {
+  background-color: #333; /* Dark gray background color for the central box */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 15px; /* Add padding to match the dark gray background */
+  border-radius: 5px; /* Adjust border-radius for the central box */
+}
+
+label {
+  font-weight: bold;
+  color: #ff9900; /* Label color */
+}
+
+input {
+  padding: 10px;
+  background-color: #333; /* Dark gray input background color */
+  border: 1px solid #555; /* Input border color */
+  color: #ffffff; /* Input text color */
+}
+
+button[type="submit"] {
+  background-color: #ffcc00; /* Button background color */
+  color: #1f1f1f; /* Button text color */
+  border: none;
+  padding: 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button[type="submit"]:hover {
+  background-color: #e6b800; /* Hovered button background color */
+}
