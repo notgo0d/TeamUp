@@ -9,15 +9,24 @@ import Team from '../panels/Team';
 import Profile from '../auth/Profile'; // Import the Profile component
 
 const Navbar = () => {
-  const [isLoginOpen, setLoginOpen] = useState(false);
+  const [isLoginOpen, setLoginOpen] = useState(true); // Show Login by default
   const [isSignupOpen, setSignupOpen] = useState(false);
   const [isFriendsPanelOpen, setFriendsPanelOpen] = useState(false);
   const [isTeamPanelOpen, setTeamPanelOpen] = useState(false);
-  const [isProfileOpen, setProfileOpen] = useState(false); // Add state for the profile
+  const [isProfileOpen, setProfileOpen] = useState(false);
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [userData, setUserData] = useState(null); // State to store user data
+
+  useEffect(() => {
+    // Simulate user login
+    // Commenting out to start the page without a user
+    // setLoggedIn(true);
+  }, []);
 
   const openLogin = () => {
     console.log("Opening Login");
     setLoginOpen(true);
+    setSignupOpen(false);
   };
 
   const closeLogin = () => {
@@ -28,6 +37,7 @@ const Navbar = () => {
   const openSignup = () => {
     console.log("Opening Signup");
     setSignupOpen(true);
+    setLoginOpen(false);
   };
 
   const closeSignup = () => {
@@ -45,60 +55,87 @@ const Navbar = () => {
     setProfileOpen(!isProfileOpen);
   };
 
+  const handleLogin = (user) => {
+    setLoggedIn(true);
+    setUserData(user);
+    closeLogin();
+  };
+
+  const handleLogout = () => {
+    setLoggedIn(false);
+    setUserData(null);
+  };
+
   return (
     <nav>
       <ul className="left-links">
         <li>
           <Link to="/">Home</Link>
         </li>
-        <li>
-          <div onClick={() => setTeamPanelOpen((prev) => !prev)}>
-            <Link to="/team">Team</Link>
-          </div>
-          {isTeamPanelOpen && <Team closePanel={() => setTeamPanelOpen(false)} />}
-        </li>
+        {isLoggedIn && (
+          <li>
+            <div onClick={() => setTeamPanelOpen((prev) => !prev)}>
+              <Link to="/team">Team</Link>
+            </div>
+            {isTeamPanelOpen && <Team closePanel={() => setTeamPanelOpen(false)} />}
+          </li>
+        )}
       </ul>
       <ul className="right-links">
         <li>
           <Link to="/publications">Publications</Link>
         </li>
-        <li>
-          <Link to="/friends" onClick={() => setFriendsPanelOpen(!isFriendsPanelOpen)}>
-            F
-          </Link>
-        </li>
-        <li className="login-link">
-          {/* Conditionally render Login or Profile */}
-          {isProfileOpen ? (
-            <div onClick={toggleProfile}>
-              <Link to="#">Profile</Link>
-              {isProfileOpen && <Profile />}
-            </div>
-          ) : (
-            <Link to="/login" onClick={openLogin}>
-              Login
-            </Link>
-          )}
-          {isLoginOpen && (
-            <div className="modal">
-              <div className="modal-content">
-                <Login closeLogin={closeLogin} />
-              </div>
-            </div>
-          )}
-        </li>
-        <li className="signup-link">
-          <Link to="/signup" onClick={openSignup}>
-            Sign Up
-          </Link>
-          {isSignupOpen && (
-            <div className="modal">
-              <div className="modal-content">
-                <Signup closeSignup={closeSignup} />
-              </div>
-            </div>
-          )}
-        </li>
+        {isLoggedIn ? (
+          <>
+            <li>
+              <Link to="/friends" onClick={() => setFriendsPanelOpen(!isFriendsPanelOpen)}>
+                F
+              </Link>
+            </li>
+            <li className="login-link">
+              {userData ? (
+                <div onClick={toggleProfile}>
+                  <Link to="#">{userData.username}</Link>
+                  {isProfileOpen && <Profile />}
+                </div>
+              ) : (
+                <Link to="#" onClick={toggleProfile}>
+                  User
+                </Link>
+              )}
+            </li>
+            <li>
+              <button onClick={handleLogout}>Logout</button>
+            </li>
+          </>
+        ) : (
+          <>
+            <li className="login-link">
+              <Link to="/login" onClick={openLogin}>
+                Login
+              </Link>
+              {isLoginOpen && (
+                <div className="modal">
+                  <div className="modal-content">
+                    <Login closeLogin={closeLogin} onLogin={handleLogin} />
+                  </div>
+                </div>
+              )}
+            </li>
+            <li className="signup-link">
+              <Link to="/signup" onClick={openSignup}>
+                Sign Up
+              </Link>
+              {isSignupOpen && (
+                <div className="modal">
+                  <div className="modal-content">
+                    <Signup closeSignup={closeSignup} />
+                  </div>
+                </div>
+              )}
+            </li>
+          </>
+        )}
       </ul>
       {isFriendsPanelOpen && <FriendsPanel closeFriendsPanel={closeFriendsPanel} isOpen={isFriendsPanelOpen} />}
     </nav>

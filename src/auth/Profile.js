@@ -1,12 +1,12 @@
 // Profile.js
 import React, { useEffect, useState } from 'react';
-import firebase from '../bd/firebase'; // Import your Firebase configuration
+import { auth, firestore } from '../bd/firebase'; // Import auth and firestore from your Firebase configuration
 
 const Profile = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = firebase.auth().onAuthStateChanged((authUser) => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         // User is signed in
         setUser(authUser);
@@ -21,22 +21,27 @@ const Profile = () => {
     };
   }, []);
 
-  if (!user) {
-    // User is not logged in
-    return <p>Please log in to view your profile.</p>;
-  }
-
-  // Fetch user data from Firestore
-  // Customize this based on your Firestore data structure
   const fetchUserData = async () => {
+    if (!user) {
+      // User is not logged in
+      console.log('User is not logged in');
+      return;
+    }
+
     try {
-      const userSnapshot = await firebase.firestore().collection('users').doc(user.uid).get();
+      // Fetch user data from Firestore
+      const userSnapshot = await firestore.collection('users').doc(user.uid).get();
       const userData = userSnapshot.data();
       console.log('User Data:', userData);
     } catch (error) {
       console.error('Error fetching user data:', error.message);
     }
   };
+
+  if (!user) {
+    // User is not logged in
+    return <p>Please log in to view your profile.</p>;
+  }
 
   return (
     <div>
@@ -48,3 +53,4 @@ const Profile = () => {
 };
 
 export default Profile;
+

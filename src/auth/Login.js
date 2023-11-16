@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Login.css';
-import firebase from '../bd/firebase'; // Import your Firebase configuration
+import { auth, firebase } from '../bd/firebase';
 import { useNavigate } from 'react-router-dom';
 
 const Login = ({ closeLogin }) => {
@@ -27,6 +27,7 @@ const Login = ({ closeLogin }) => {
 
   return (
     <div className="auth-modal">
+      <span className="close-btn" onClick={closeLogin}>×</span>
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
         {/* Your form fields */}
@@ -37,12 +38,12 @@ const Login = ({ closeLogin }) => {
 
         <button type="submit">Login</button>
       </form>
-      <button onClick={closeLogin}>Close</button>
     </div>
   );
 };
 
 export default Login;
+
 
 
 

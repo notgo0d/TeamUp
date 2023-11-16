@@ -1,48 +1,62 @@
+/* Login.css */
+
 .auth-modal {
-  background-color: #1f1d1d; /* Dark gray background color for the entire modal */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgb(20, 20, 20);
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(255, 165, 0, 0.5); /* Orange shadow */
+  border-radius: 8px;
   text-align: center;
-  color: #ffffff; /* Text color */
-  border: 2px solid #ff9900; /* Orange border */
+  width: 60%;
+  max-width: 400px;
+  margin-left: -200px; /* Adjust margin to center the modal more */
 }
 
-h2 {
-  margin-top: 0;
-  color: #ff9900; /* Header color */
+.auth-modal h2 {
+  margin-bottom: 20px;
 }
 
-form {
-  background-color: #333; /* Dark gray background color for the central box */
+.auth-modal form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  padding: 15px; /* Add padding to match the dark gray background */
-  border-radius: 5px; /* Adjust border-radius for the central box */
+  align-items: center;
 }
 
-label {
-  font-weight: bold;
-  color: #ff9900; /* Label color */
+.auth-modal label {
+  margin-bottom: 8px;
 }
 
-input {
-  padding: 10px;
-  background-color: #333; /* Dark gray input background color */
-  border: 1px solid #555; /* Input border color */
-  color: #ffffff; /* Input text color */
+.auth-modal input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 16px;
+  border-radius: 20px; /* Add border-radius to make the input fields more circular */
 }
 
-button[type="submit"] {
-  background-color: #ffcc00; /* Button background color */
-  color: #1f1f1f; /* Button text color */
+.auth-modal button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
   border: none;
-  padding: 15px;
+  border-radius: 4px;
   cursor: pointer;
-  border-radius: 5px;
 }
 
-button[type="submit"]:hover {
-  background-color: #e6b800; /* Hovered button background color */
+.auth-modal button:hover {
+  background-color: #0056b3;
 }
+
+.close-btn {
+  position: absolute;
+  top: 0; /* Align to the top */
+  right: 0; /* Align to the right */
+  cursor: pointer;
+  font-size: 18px;
+  color: rgb(0, 0, 0);
+  background-color: #fff; /* White circle background */
+  border-radius: 50%; /* Make it a circle */
+  padding: 12px; /* Adjust padding to make it more circular and bigger */
+}
+

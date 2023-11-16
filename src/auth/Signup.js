@@ -1,13 +1,12 @@
 // Signup.js
 import React, { useState } from 'react';
 import './Signup.css';
-import { auth, firestore } from '../bd/firebase';
+import { auth, firestore } from '../bd/firebase'; // Import auth and firestore
 
 const Signup = ({ closeSignup }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
-  
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -33,6 +32,7 @@ const Signup = ({ closeSignup }) => {
 
   return (
     <div className="auth-modal">
+      <span className="close-btn" onClick={closeSignup}>×</span>
       <h2>Sign Up</h2>
       <form onSubmit={handleSignup}>
         {/* Your form fields */}
@@ -45,12 +45,13 @@ const Signup = ({ closeSignup }) => {
 
         <button type="submit">Sign Up</button>
       </form>
-      <button onClick={closeSignup}>Close</button>
     </div>
   );
 };
 
 export default Signup;
+
+
 
 
 
